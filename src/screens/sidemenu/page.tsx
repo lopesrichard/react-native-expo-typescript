@@ -1,7 +1,7 @@
 import React from 'react';
 
-import View from '@components/view';
-import Icon from '@components/icon';
+import View from '~/components/view';
+import Icon from '~/components/icon';
 
 export default ({ children, navigation }) => {
   const openDrawer = () => navigation.openDrawer();

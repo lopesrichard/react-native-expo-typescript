@@ -1,10 +1,10 @@
 import React from 'react';
 
-import Page from '@screens/sidemenu/page';
+import Page from '~/screens/sidemenu/page';
 
-import View from '@components/view';
-import Text from '@components/text';
-import Button from '@components/button';
+import View from '~/components/view';
+import Text from '~/components/text';
+import Button from '~/components/button';
 
 export default ({ navigation }) => {
   const logout = () => navigation.navigate('Login');

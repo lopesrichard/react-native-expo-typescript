@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import Page from '@screens/sidemenu/page';
+import Page from '~/screens/sidemenu/page';
 
-import Text from '@components/text';
-import Input from '@components/input';
+import Text from '~/components/text';
+import Input from '~/components/input';
 
 export default ({ navigation }) => {
   const [name, setName] = useState('');

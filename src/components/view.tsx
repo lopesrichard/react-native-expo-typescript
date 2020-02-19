@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 
-import colors from '@util/colors';
+import colors from '~/util/colors';
 
 const align = value => {
   return {

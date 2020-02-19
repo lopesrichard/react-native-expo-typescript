@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Text } from 'react-native';
 
-import colors from '@util/colors';
+import colors from '~/util/colors';
 
 const Thin = props => {
   const { style, properties } = parseProps({ ...props, weight: '100' });

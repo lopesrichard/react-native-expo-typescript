@@ -3,11 +3,11 @@ import { Dimensions, Animated } from 'react-native';
 import { line, curveBasis } from 'd3-shape';
 import Svg, { Path } from 'react-native-svg';
 
-import Icon from '@components/icon';
-import View from '@components/view';
+import Icon from '~/components/icon';
+import View from '~/components/view';
 
-import colors from '@util/colors';
-import themes from '@util/themes';
+import colors from '~/util/colors';
+import themes from '~/util/themes';
 
 const { width } = Dimensions.get('window');
 

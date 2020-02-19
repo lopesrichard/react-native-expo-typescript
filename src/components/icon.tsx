@@ -2,7 +2,7 @@ import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
 
 import React from 'react';
 
-import colors from '@util/colors';
+import colors from '~/util/colors';
 
 export default function Icon(props) {
   const properties = { ...props, color: props.color ? colors[props.color] : undefined };

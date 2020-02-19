@@ -1,10 +1,10 @@
 import React from 'react';
 
-import View from '@components/view';
-import Text from '@components/text';
+import View from '~/components/view';
+import Text from '~/components/text';
 
-import { coalesce } from '@util/object';
-import themes from '@util/themes';
+import { coalesce } from '~/util/object';
+import themes from '~/util/themes';
 
 const getTheme = ({ primary, secondary, success, warning, info, danger, light, dark, contrast, outline, disabled }) => {
   const theme = themes[coalesce({ primary, secondary, success, warning, info, danger, light, dark })];

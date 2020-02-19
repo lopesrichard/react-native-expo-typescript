@@ -1,8 +1,8 @@
 import React from 'react';
 
-import View from '@components/view';
-import Text from '@components/text';
-import Button from '@components/button';
+import View from '~/components/view';
+import Text from '~/components/text';
+import Button from '~/components/button';
 
 export default ({ navigation }) => {
   const login = () => navigation.navigate('TabMenu');

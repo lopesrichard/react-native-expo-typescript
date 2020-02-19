@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 
-import colors from '@util/colors';
+import colors from '~/util/colors';
 
-import View from '@components/view';
-import Label from '@components/text';
-import Icon from '@components/icon';
+import View from '~/components/view';
+import Label from '~/components/text';
+import Icon from '~/components/icon';
 
 import { TextInput } from 'react-native';
 

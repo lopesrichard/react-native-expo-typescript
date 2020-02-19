@@ -1,7 +1,7 @@
 import React from 'react';
 
-import View from '@components/view';
-import Text from '@components/text';
+import View from '~/components/view';
+import Text from '~/components/text';
 
 export default ({ navigation }) => {
   return (
