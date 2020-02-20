@@ -1,21 +1,23 @@
 import React from 'react';
 
-import store from '~/store';
-import CardActions from '~/actions/cards';
+import store from '~/redux/store';
+import { actions } from '~/redux/cards';
 
 import View from '~/components/view';
 import Text from '~/components/text';
 import Button from '~/components/button';
 
 export default ({ navigation }) => {
+  const { add, remove } = actions;
+
   const addCard = () => {
     const card = { number: '1234123412341234' };
-    store.dispatch(CardActions.add(card));
+    store.dispatch(add(card));
   };
 
-  const removeLastCard = () => {
+  const removeCards = () => {
     const card = { number: '1234123412341234' };
-    store.dispatch(CardActions.remove(card));
+    store.dispatch(remove(card));
   };
 
   return (
@@ -24,7 +26,7 @@ export default ({ navigation }) => {
         Buscar
       </Text.Bold>
       <Button.Rounded text="Adicionar cartão" mt={50} primary onPress={addCard} />
-      <Button.Rounded text="Remover cartão" mt={10} primary onPress={removeLastCard} />
+      <Button.Rounded text="Remover cartões" mt={10} primary onPress={removeCards} />
     </View.Center>
   );
 };
