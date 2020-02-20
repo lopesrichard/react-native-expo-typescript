@@ -9,7 +9,6 @@ import themes from '~/util/themes';
 const getTheme = ({ primary, secondary, success, warning, info, danger, light, dark, contrast, outline, disabled }) => {
   const theme = themes[coalesce({ primary, secondary, success, warning, info, danger, light, dark })];
   const [primary_color, secondary_color] = contrast ? [theme.contrast, theme.color] : [theme.color, theme.contrast];
-  console.log(secondary_color);
   return {
     view: { color: primary_color, bw: outline ? 1.5 : 0, bc: secondary_color, opacity: disabled ? 0.5 : 1 },
     text: { color: secondary_color },

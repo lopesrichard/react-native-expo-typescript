@@ -1,10 +1,16 @@
 import 'react-native-gesture-handler';
 import React from 'react';
-import { useScreens } from 'react-native-screens';
+import { enableScreens } from 'react-native-screens';
 import Router from '~/navigators';
+import { Provider } from 'react-redux';
+import store from '~/store';
 
-useScreens();
+enableScreens();
 
 export default function App() {
-  return <Router />;
+  return (
+    <Provider store={store}>
+      <Router />
+    </Provider>
+  );
 }

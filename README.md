@@ -7,7 +7,9 @@ A template for fast start development of react native apps.
 - [Expo](https://github.com/expo/expo)
 - [Typescript](https://github.com/Microsoft/TypeScript)
 - [React Navigation v5](https://reactnavigation.org)
-- [AsyncStorage](https://github.com/react-native-community/async-storage)
+- [Redux](https://github.com/reduxjs/redux)
+- [Redux Toolkit](https://redux-toolkit.js.org)
+- [Reactotron](https://github.com/infinitered/reactotron)
 - [Axios](https://github.com/axios/axios)
 
 ## Custom Components

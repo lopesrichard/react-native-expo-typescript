@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   Animated as Animation,
   StyleSheet,
+  ScrollView,
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -199,6 +200,11 @@ const SafeArea = props => {
   return <SafeAreaView {...properties} style={style} />;
 };
 
+const Scroll = props => {
+  const { style, properties } = parseProps({ ...props });
+  return <ScrollView {...properties} style={style} keyboardShouldPersistTaps="handle" />;
+};
+
 const Animated = props => {
   const { style, properties } = parseProps({ ...props });
   return <Animation.View {...properties} style={style} />;
@@ -214,4 +220,4 @@ const Touchable = props => {
   }
 };
 
-export default { Column, Row, Center, Absolute, SafeArea, Animated, Touchable };
+export default { Column, Row, Center, Absolute, SafeArea, Scroll, Animated, Touchable };
