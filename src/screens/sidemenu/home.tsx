@@ -18,7 +18,7 @@ export default ({ navigation }) => {
         Página Inicial
       </Text.Bold>
       <View.Center mt={50}>
-        <Button.Rounded text="Realizar Pagamento" mt={10} primary />
+        <Button.Rounded text="Realizar Pagamento" mt={10} primary loading={true} />
         <Button.Rounded text="Sair" mt={10} secondary onPress={leave} />
       </View.Center>
     </Page>
