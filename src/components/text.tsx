@@ -80,7 +80,7 @@ const parseProps = props => {
     paddingRight: props.pr || props.px || props.p || undefined,
     paddingTop: props.pt || props.py || props.p || undefined,
     paddingBottom: props.pb || props.py || props.p || undefined,
-    color: props.color ? colors[props.color] : null,
+    color: props.color ? colors.parse(props.color) : null,
     fontSize: props.size || undefined,
     fontWeight: props.weight || undefined,
   };

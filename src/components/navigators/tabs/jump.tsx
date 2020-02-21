@@ -109,7 +109,7 @@ class StaticTabbar extends React.PureComponent {
                 transform={[{ translateY }]}
                 w={width / tabs.length}
                 l={(width / tabs.length) * key}>
-                <View.Center color="smoky" size={40} br={20}>
+                <View.Center color="primary" size={40} br={20}>
                   <Icon name={tab.icon} color="white" size={20} />
                 </View.Center>
               </View.Animated>

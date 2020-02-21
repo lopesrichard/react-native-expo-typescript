@@ -79,17 +79,18 @@ const parseProps = props => {
     borderRightWidth: props.brw || props.bxw || props.bw || undefined,
     borderTopWidth: props.btw || props.byw || props.bw || undefined,
     borderBottomWidth: props.bbw || props.byw || props.bw || undefined,
-    borderColor: props.bc ? colors[props.bc] : undefined,
-    borderLeftColor: props.blc || props.bxc || props.bc ? colors[props.blc || props.bxc || props.bc] : undefined,
-    borderRightColor: props.brc || props.bxc || props.bc ? colors[props.brc || props.bxc || props.bc] : undefined,
-    borderTopColor: props.btc || props.byc || props.bc ? colors[props.btc || props.byc || props.bc] : undefined,
-    borderBottomColor: props.bbc || props.byc || props.bc ? colors[props.bbc || props.byc || props.bc] : undefined,
+    borderColor: props.bc ? colors.parse(props.bc) : undefined,
+    borderLeftColor: props.blc || props.bxc || props.bc ? colors.parse(props.blc || props.bxc || props.bc) : undefined,
+    borderRightColor: props.brc || props.bxc || props.bc ? colors.parse(props.brc || props.bxc || props.bc) : undefined,
+    borderTopColor: props.btc || props.byc || props.bc ? colors.parse(props.btc || props.byc || props.bc) : undefined,
+    borderBottomColor:
+      props.bbc || props.byc || props.bc ? colors.parse(props.bbc || props.byc || props.bc) : undefined,
     borderRadius: props.br || undefined,
     borderTopLeftRadius: props.btlr || props.btr || props.br || undefined,
     borderTopRightRadius: props.btrr || props.btr || props.br || undefined,
     borderBottomLeftRadius: props.bblr || props.bbr || props.br || undefined,
     borderBottomRightRadius: props.bbrr || props.bbr || props.br || undefined,
-    backgroundColor: props.color ? colors[props.color] : undefined,
+    backgroundColor: props.color ? colors.parse(props.color) : undefined,
     elevation: props.shadow || undefined,
     shadow: props.shadow ? `0 ${props.shadow}px ${props.shadow}px #999` : undefined,
     opacity: props.opacity || undefined,
@@ -172,6 +173,10 @@ const parseProps = props => {
   delete props.shadow;
   delete props.opacity;
   delete props.transform;
+
+  props.hitSlop = props.hitSlop
+    ? { top: props.hitSlop, bottom: props.hitSlop, left: props.hitSlop, right: props.hitSlop }
+    : undefined;
 
   return { style: style, properties: props };
 };

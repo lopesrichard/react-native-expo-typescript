@@ -11,7 +11,7 @@ export default ({ navigation }) => {
 
   return (
     <Page navigation={navigation}>
-      <Text.Bold size={50} color="smoky">
+      <Text.Bold size={50} color="primary">
         Página Inicial
       </Text.Bold>
       <View.Center mt={50}>

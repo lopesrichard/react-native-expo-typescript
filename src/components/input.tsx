@@ -69,7 +69,7 @@ const Text = props => {
           style={{ ...style, width: '100%' }}
           onFocus={onFocus}
           onBlur={onBlur}>
-          <Label.Normal color="smoky" size={16}>
+          <Label.Normal color="primary" size={16}>
             {props.text === '' && (!ref.current || !ref.current.isFocused()) ? props.placeholder : props.text}
           </Label.Normal>
         </TextInput>

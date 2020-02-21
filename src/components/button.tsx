@@ -3,15 +3,18 @@ import React from 'react';
 import View from '~/components/view';
 import Text from '~/components/text';
 
-import { coalesce } from '~/util/object';
 import themes from '~/util/themes';
 
-const getTheme = ({ primary, secondary, success, warning, info, danger, light, dark, contrast, outline, disabled }) => {
-  const theme = themes[coalesce({ primary, secondary, success, warning, info, danger, light, dark })];
-  const [primary_color, secondary_color] = contrast ? [theme.contrast, theme.color] : [theme.color, theme.contrast];
+const theme = (props: any) => {
+  const { contrast, outline, disabled } = props;
+  const theme = themes.resolve(props);
   return {
-    view: { color: primary_color, bw: outline ? 1.5 : 0, bc: secondary_color, opacity: disabled ? 0.5 : 1 },
-    text: { color: secondary_color },
+    view: {
+      color: disabled ? theme.disabled.color : contrast ? theme.contrast : theme.color,
+      bw: outline ? 1.5 : 0,
+      bc: disabled ? theme.disabled.contrast : contrast ? theme.color : theme.contrast,
+    },
+    text: { color: disabled ? theme.disabled.contrast : contrast ? theme.color : theme.contrast },
   };
 };
 
@@ -19,7 +22,7 @@ const default_view = { h: 45, w: 250 };
 const default_text = { size: 20 };
 
 const Button = props => {
-  const { view, text } = getTheme(props);
+  const { view, text } = theme(props);
   return (
     <View.Touchable {...view} {...default_view} {...props} align="center" justify="center" animation="opacity">
       <Text.Normal {...text} {...default_text}>

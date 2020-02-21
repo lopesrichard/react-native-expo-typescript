@@ -13,11 +13,11 @@ export default ({ navigation }) => {
   return (
     <View.Center flex={1} color="white">
       <Text.Bold size={50} color="primary">
-        Entrar
+        Cadastrar
       </Text.Bold>
       <View.Center mt={50}>
-        <Button.Rounded text="Entrar com E-mail" mt={10} primary onPress={login} />
-        <Button.Rounded text="Entrar com Facebook" mt={10} secondary onPress={login} />
+        <Button.Rounded text="Criar com E-mail" mt={10} primary onPress={login} />
+        <Button.Rounded text="Criar com Facebook" mt={10} secondary onPress={login} />
       </View.Center>
     </View.Center>
   );

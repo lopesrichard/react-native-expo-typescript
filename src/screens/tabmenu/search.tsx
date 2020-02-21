@@ -22,7 +22,7 @@ export default ({ navigation }) => {
 
   return (
     <View.Center flex={1} color="white">
-      <Text.Bold size={50} color="smoky">
+      <Text.Bold size={50} color="primary">
         Buscar
       </Text.Bold>
       <Button.Rounded text="Adicionar cartão" mt={50} primary onPress={addCard} />

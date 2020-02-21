@@ -6,7 +6,7 @@ import Text from '~/components/text';
 export default ({ navigation }) => {
   return (
     <View.Center flex={1} color="white">
-      <Text.Bold size={50} color="smoky">
+      <Text.Bold size={50} color="primary">
         Minha Conta
       </Text.Bold>
     </View.Center>

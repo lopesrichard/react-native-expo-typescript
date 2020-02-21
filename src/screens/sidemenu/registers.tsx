@@ -9,14 +9,14 @@ export default ({ navigation }) => {
   const [name, setName] = useState('');
   return (
     <Page navigation={navigation}>
-      <Text.Bold size={50} color="smoky">
+      <Text.Bold size={50} color="primary">
         Cadastros
       </Text.Bold>
       <Input.Text
         text={name}
         placeholder="Nome completo"
-        container={{ w: '70%', bw: 1, bc: 'smoky', px: 15, br: 100 }}
-        icon={{ container: { color: 'smoky', br: 100, p: 5, mr: 5 }, name: 'user-alt', color: 'white' }}
+        container={{ w: '70%', bw: 1, bc: 'primary', px: 15, br: 100 }}
+        icon={{ container: { color: 'primary', br: 100, p: 5, mr: 5 }, name: 'user-alt', color: 'white' }}
         onChangeText={text => setName(text)}
       />
     </Page>

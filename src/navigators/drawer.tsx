@@ -16,8 +16,8 @@ const Drawer = createDrawerNavigator();
 const getDrawerOptions = (label, icon, navigation) => {
   return {
     contentComponent: null,
-    drawerLabel: ({ focused, size }) => <Text.Normal {...{ color: 'smoky', size }}>{label}</Text.Normal>,
-    drawerIcon: ({ focused }) => <Icon color='smoky' name={icon} size={20} />
+    drawerLabel: ({ focused, size }) => <Text.Normal {...{ color: 'primary', size }}>{label}</Text.Normal>,
+    drawerIcon: ({ focused }) => <Icon color="primary" name={icon} size={20} />,
   };
 };
 

@@ -9,7 +9,7 @@ export default ({ children, navigation }) => {
   return (
     <View.Center flex={1} color="white">
       <View.Touchable position="absolute" t={20} l={20} onPress={openDrawer} animation="opacity">
-        <Icon name="bars" color="smoky" size={25} />
+        <Icon name="bars" color="primary" size={25} />
       </View.Touchable>
       {children}
     </View.Center>
