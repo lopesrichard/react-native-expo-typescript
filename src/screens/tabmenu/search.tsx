@@ -1,7 +1,7 @@
 import React from 'react';
 
 import store from '~/redux/store';
-import { actions } from '~/redux/cards';
+import { actions } from '~/redux/slices/cards';
 
 import View from '~/components/view';
 import Text from '~/components/text';
@@ -26,7 +26,7 @@ export default ({ navigation }) => {
         Buscar
       </Text.Bold>
       <Button.Rounded text="Adicionar cartão" mt={50} primary onPress={addCard} />
-      <Button.Rounded text="Remover cartões" mt={10} primary onPress={removeCards} />
+      <Button.Rounded text="Remover cartões" mt={10} secondary onPress={removeCards} />
     </View.Center>
   );
 };

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
+import connect from '~/redux/connect';
 
 import View from '~/components/view';
 import Text from '~/components/text';
 
-const Wallet = ({ navigation, cards }) => {
+export default connect(({ navigation, cards }) => {
   return (
     <View.Center flex={1} color="white" p={20}>
       <Text.Bold size={50} align="center" color="primary">
@@ -22,10 +22,4 @@ const Wallet = ({ navigation, cards }) => {
       </View.Scroll>
     </View.Center>
   );
-};
-
-const mapStateToProps = state => {
-  return { cards: state.cards };
-};
-
-export default connect(mapStateToProps)(Wallet);
+});
