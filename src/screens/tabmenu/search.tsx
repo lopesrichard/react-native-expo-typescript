@@ -1,23 +1,19 @@
 import React from 'react';
 
-import store from '~/redux/store';
-import { actions } from '~/redux/slices/cards';
+import { connect } from 'react-redux';
+import { addCard, removeCard } from '~/slices/cards';
 
 import View from '~/components/view';
 import Text from '~/components/text';
 import Button from '~/components/button';
 
-export default ({ navigation }) => {
-  const { add, remove } = actions;
-
-  const addCard = () => {
-    const card = { number: '1234123412341234' };
-    store.dispatch(add(card));
+const Search = ({ navigation, addCard, removeCard }) => {
+  const onAddCard = () => {
+    addCard({ number: '1234123412341234' });
   };
 
-  const removeCards = () => {
-    const card = { number: '1234123412341234' };
-    store.dispatch(remove(card));
+  const onRemoveCard = () => {
+    removeCard({ number: '1234123412341234' });
   };
 
   return (
@@ -25,8 +21,12 @@ export default ({ navigation }) => {
       <Text.Bold size={50} color="primary">
         Buscar
       </Text.Bold>
-      <Button.Rounded text="Adicionar cartão" mt={50} primary onPress={addCard} />
-      <Button.Rounded text="Remover cartões" mt={10} secondary onPress={removeCards} />
+      <Button.Rounded text="Adicionar cartão" mt={50} primary onPress={onAddCard} />
+      <Button.Rounded text="Remover cartões" mt={10} secondary onPress={onRemoveCard} />
     </View.Center>
   );
 };
+
+const mapDispatch = { addCard, removeCard };
+
+export default connect(null, mapDispatch)(Search);

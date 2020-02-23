@@ -1,12 +1,12 @@
 import React from 'react';
 
-import connect from '~/redux/connect';
+import { connect } from 'react-redux';
 
 import View from '~/components/view';
 import Text from '~/components/text';
 import Icon from '~/components/icon';
 
-export default connect(({ children, navigation, user }) => {
+const Page = ({ children, navigation, user }) => {
   const openDrawer = () => navigation.openDrawer();
 
   return (
@@ -22,4 +22,10 @@ export default connect(({ children, navigation, user }) => {
       {children}
     </View.Center>
   );
+};
+
+const mapState = state => ({
+  user: state.user,
 });
+
+export default connect(mapState)(Page);

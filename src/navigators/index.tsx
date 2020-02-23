@@ -1,12 +1,18 @@
 import React from 'react';
 
-import connect from '~/redux/connect';
+import { connect } from 'react-redux';
 
 import { NavigationContainer } from '@react-navigation/native';
 
 import Login from '~/navigators/login';
 import TabMenu from '~/navigators/tabs';
 
-export default connect(({ user }) => {
+const Router = ({ user }) => {
   return <NavigationContainer>{user ? <TabMenu /> : <Login />}</NavigationContainer>;
+};
+
+const mapState = state => ({
+  user: state.user,
 });
+
+export default connect(mapState)(Router);

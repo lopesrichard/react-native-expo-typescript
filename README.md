@@ -2,14 +2,16 @@
 
 A template for fast start development of react native apps.
 
-## Features
+## Packages & Features
 
-- [Expo](https://github.com/expo/expo)
-- [Typescript](https://github.com/Microsoft/TypeScript)
+- [Expo](https://expo.io)
+- [Typescript](https://www.typescriptlang.org)
 - [React Navigation v5](https://reactnavigation.org)
-- [Redux](https://github.com/reduxjs/redux)
+- [Redux](https://redux.js.org)
+- [React Redux](https://react-redux.js.org)
 - [Redux Toolkit](https://redux-toolkit.js.org)
-- [Reactotron](https://github.com/infinitered/reactotron)
+- [Lottie](https://airbnb.design/lottie)
+- [Reactotron](https://infinite.red/reactotron)
 - [Axios](https://github.com/axios/axios)
 
 ## Custom Components
@@ -20,17 +22,17 @@ import Text from '~/components/text';
 import Button from '~/components/button';
 
 export default () => (
-  <View.Center flex={1} color='maroon'>
-    <Text.Bold size={50} color='white'>
+  <View.Center flex={1} color="maroon">
+    <Text.Bold size={50} color="white">
       Welcome
     </Text.Bold>
     <View.Center mt={50}>
-      <Button.Flat text='Register' />
-      <Button.Flat text='Register' mt={10} disabled />
+      <Button.Flat text="Register" />
+      <Button.Flat text="Register" mt={10} disabled />
     </View.Center>
     <View.Center mt={20}>
-      <Button.Rounded text='Login' />
-      <Button.Rounded text='Login' mt={10} disabled />
+      <Button.Rounded text="Login" />
+      <Button.Rounded text="Login" mt={10} disabled />
     </View.Center>
   </View.Center>
 );

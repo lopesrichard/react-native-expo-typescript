@@ -1,5 +1,3 @@
-import store from '~/redux/store';
-
 import Storage from '~/services/storage';
 
 import { createSlice } from '@reduxjs/toolkit';
@@ -16,23 +14,25 @@ type ActionRemoveProps = {
   payload: User;
 };
 
-export const { actions, reducer } = createSlice({
+const { actions, reducer } = createSlice({
   name: 'user',
   initialState: null,
   reducers: {
     login: (state, action: ActionPushProps) => {
-      const user = action.payload;
-      Storage.save('@user', user);
-      return user;
+      Storage.save('@user', action.payload);
+      return action.payload;
     },
-    logout: (state, action: ActionRemoveProps) => {
+    logout: () => {
       Storage.remove('@user');
       return null;
     },
   },
 });
 
-(async () => {
-  const user = await Storage.load('@user');
-  user && store.dispatch(actions.login(user));
-})();
+export const { login, logout } = actions;
+export default reducer;
+
+// (async () => {
+//   const user = await Storage.load('@user');
+//   user && store.dispatch(actions.login(user));
+// })();

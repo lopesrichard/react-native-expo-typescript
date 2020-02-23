@@ -1,20 +1,18 @@
 import React from 'react';
 
-import * as Facebook from 'expo-facebook';
+import { connect } from 'react-redux';
+import { login } from '~/slices/user';
 
-import store from '~/redux/store';
-import { actions } from '~/redux/slices/user';
+import * as Facebook from 'expo-facebook';
 
 import View from '~/components/view';
 import Text from '~/components/text';
 import Button from '~/components/button';
 
-export default () => {
-  const { login } = actions;
-
+const Login = ({ login }) => {
   Facebook.initializeAsync(undefined, undefined);
 
-  const enter = () => store.dispatch(login({ name: 'Richard' }));
+  const enter = () => login({ name: 'Richard' });
   return (
     <View.Center flex={1} color="white">
       <Text.Bold size={50} color="primary">
@@ -27,3 +25,7 @@ export default () => {
     </View.Center>
   );
 };
+
+const mapDispatch = { login };
+
+export default connect(null, mapDispatch)(Login);
