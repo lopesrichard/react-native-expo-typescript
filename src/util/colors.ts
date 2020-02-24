@@ -1,7 +1,7 @@
 import themes from '~/util/themes';
 
 const parse = function(color: string) {
-  return this[color] || this[themes.resolve({ [color]: true }).color];
+  return this[color] || this[themes.resolve({ [color]: true })?.color] || color;
 };
 
 export default {

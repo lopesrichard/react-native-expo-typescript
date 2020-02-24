@@ -7,17 +7,31 @@ import Input from '~/components/input';
 
 export default ({ navigation }) => {
   const [name, setName] = useState('');
+  const [document, setDocument] = useState('');
+  const [birthDay, setBirthDay] = useState('');
   return (
     <Page navigation={navigation}>
       <Text.Bold size={50} color="primary">
         Cadastros
       </Text.Bold>
-      <Input.Text
-        text={name}
-        placeholder="Nome completo"
-        container={{ w: '70%', bw: 1, bc: 'primary', px: 15, br: 100 }}
-        icon={{ container: { color: 'primary', br: 100, p: 5, mr: 5 }, name: 'user-alt', color: 'white' }}
-        onChangeText={text => setName(text)}
+      <Input.Animated text={name} icon="user" placeholder="Nome completo" onChangeText={setName} mt={5} />
+      <Input.Animated
+        text={document}
+        keyboardType="numeric"
+        mask="cpf"
+        icon="file-alt"
+        placeholder="Documento"
+        onChangeText={setDocument}
+        mt={5}
+      />
+      <Input.Animated
+        text={birthDay}
+        keyboardType="numeric"
+        mask="date"
+        icon="calendar"
+        placeholder="Data de Nascimento"
+        onChangeText={setBirthDay}
+        mt={5}
       />
     </Page>
   );

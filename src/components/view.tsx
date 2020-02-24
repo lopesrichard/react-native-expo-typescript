@@ -95,6 +95,7 @@ const parseProps = props => {
     shadow: props.shadow ? `0 ${props.shadow}px ${props.shadow}px #999` : undefined,
     opacity: props.opacity || undefined,
     transform: props.transform || undefined,
+    pointerEvents: props.pointerEvents || undefined,
   };
 
   for (var prop in style) {

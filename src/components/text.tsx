@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Text } from 'react-native';
+import { Text, Animated as RNAnimated } from 'react-native';
 
 import colors from '~/util/colors';
 
@@ -49,6 +49,11 @@ const Black = props => {
   return <Text {...properties} style={style} />;
 };
 
+const Animated = props => {
+  const { style, properties } = parseProps({ ...props });
+  return <RNAnimated.Text {...properties} style={style} />;
+};
+
 export default {
   Thin,
   ExtraLight,
@@ -59,6 +64,7 @@ export default {
   Bold,
   ExtraBold,
   Black,
+  Animated,
 };
 
 const parseProps = props => {

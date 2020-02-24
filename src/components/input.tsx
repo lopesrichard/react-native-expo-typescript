@@ -1,12 +1,13 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
-import colors from '~/util/colors';
+import { TextInput, Animated as RNAnimated } from 'react-native';
 
 import View from '~/components/view';
-import Label from '~/components/text';
+import Text from '~/components/text';
 import Icon from '~/components/icon';
 
-import { TextInput } from 'react-native';
+import colors from '~/util/colors';
+import mask from '~/util/mask';
 
 const parseProps = props => {
   const style = {};
@@ -20,62 +21,89 @@ const parseProps = props => {
   delete props.placeholder;
   delete props.container;
   delete props.input;
-  delete props.label;
+  delete props.Text;
   delete props.text;
   delete props.icon;
+  delete props.color;
 
   return { style: style, properties: props };
 };
 
-const default_container = {};
-const default_icon_container = {};
-const default_icon = { size: 14 };
-const default_label = { size: 16 };
-const default_input = {};
+const Animated = props => {
+  const [animatedY] = React.useState(new RNAnimated.Value(0));
+  const [animatedX] = React.useState(new RNAnimated.Value(0));
+  const [animatedScale] = React.useState(new RNAnimated.Value(0));
+  const [animatedColor] = React.useState(new RNAnimated.Value(0));
 
-const Text = props => {
-  const { container, label, icon } = props;
   const { style, properties } = parseProps({ ...props });
 
-  const onFocus = () => {
-    props.onChangeText('');
-    props.onFocus && props.onFocus();
+  const animateIn = (changeColor = true) => {
+    RNAnimated.parallel([
+      RNAnimated.spring(animatedY, { toValue: 1, useNativeDriver: true }),
+      RNAnimated.spring(animatedX, { toValue: 1, useNativeDriver: true }),
+      RNAnimated.spring(animatedScale, { toValue: 1, useNativeDriver: true }),
+      changeColor ? RNAnimated.timing(animatedColor, { toValue: 150, duration: 300 }) : undefined,
+    ]).start();
   };
 
-  const onBlur = () => {
-    props.onChangeText(props.placeholder);
-    props.onBlur && props.onBlur();
+  const animateOut = () => {
+    RNAnimated.timing(animatedColor, { toValue: 0, duration: 300 }).start();
+    if (props.text === '') {
+      RNAnimated.parallel([
+        RNAnimated.spring(animatedY, { toValue: 0, useNativeDriver: true }),
+        RNAnimated.spring(animatedX, { toValue: 0, useNativeDriver: true }),
+        RNAnimated.spring(animatedScale, { toValue: 0, useNativeDriver: true }),
+      ]).start();
+    }
   };
 
-  const ref = useRef(null);
+  props.text ? animateIn(false) : animateOut();
+
+  const translateY = animatedY.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, -15],
+  });
+
+  const translateX = animatedX.interpolate({
+    inputRange: [0, 1],
+    outputRange: [10, -10],
+  });
+
+  const scale = animatedScale.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 0.7],
+  });
+
+  const color = animatedColor.interpolate({
+    inputRange: [0, 150],
+    outputRange: [colors.parse('primary'), colors.parse('secondary')],
+  });
+
+  const default_container = { h: 50, justify: 'center', w: '80%', bw: 1, mt: 5, bc: color };
 
   return (
-    <View.Column {...default_container} {...container}>
-      {label && (
-        <Label.Bold {...default_label} {...label}>
-          {label.text}
-        </Label.Bold>
-      )}
+    <View.Animated {...default_container} {...props.container}>
       <View.Row align="center">
-        {icon && (
-          <View.Column {...default_icon_container} {...icon.container}>
-            <Icon {...default_icon} {...icon} />
-          </View.Column>
+        {props.icon && (
+          <View.Animated size={50} p={5} align="center" justify="center" color={color}>
+            <Icon color="white" size={18} name={props.icon} />
+          </View.Animated>
         )}
-        <TextInput
-          ref={ref}
-          {...default_input}
-          {...properties}
-          style={{ ...style, width: '100%' }}
-          onFocus={onFocus}
-          onBlur={onBlur}>
-          <Label.Normal color="primary" size={16}>
-            {props.text === '' && (!ref.current || !ref.current.isFocused()) ? props.placeholder : props.text}
-          </Label.Normal>
-        </TextInput>
+        <View.Column w="100%" mt={10} px={10}>
+          <TextInput {...properties} style={{ ...style, width: '100%' }} onFocus={animateIn} onBlur={animateOut}>
+            <Text.Animated color={color} size={16}>
+              {props.mask ? mask(props.mask, props.text) : props.text}
+            </Text.Animated>
+          </TextInput>
+          <View.Animated pointerEvents="none" position="absolute" l={0} transform={[{ translateX, translateY, scale }]}>
+            <Text.Animated color={color} size={16}>
+              {props.placeholder}
+            </Text.Animated>
+          </View.Animated>
+        </View.Column>
       </View.Row>
-    </View.Column>
+    </View.Animated>
   );
 };
 
-export default { Text };
+export default { Animated };
