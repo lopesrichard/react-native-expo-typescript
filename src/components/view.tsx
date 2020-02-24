@@ -2,6 +2,8 @@ import React from 'react';
 
 import {
   View,
+  Keyboard,
+  KeyboardAvoidingView,
   SafeAreaView,
   Animated as Animation,
   StyleSheet,
@@ -208,7 +210,7 @@ const SafeArea = props => {
 
 const Scroll = props => {
   const { style, properties } = parseProps({ ...props });
-  return <ScrollView {...properties} style={style} keyboardShouldPersistTaps="handle" />;
+  return <ScrollView {...properties} contentContainerStyle={style} keyboardShouldPersistTaps="handle" />;
 };
 
 const Animated = props => {
@@ -226,4 +228,14 @@ const Touchable = props => {
   }
 };
 
-export default { Column, Row, Center, Absolute, SafeArea, Scroll, Animated, Touchable };
+const KeyboardAvoid = props => {
+  return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView behavior="padding" enabled style={{ flex: 1 }}>
+        {props.children}
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
+  );
+};
+
+export default { Column, Row, Center, Absolute, SafeArea, Scroll, Animated, Touchable, KeyboardAvoid };
