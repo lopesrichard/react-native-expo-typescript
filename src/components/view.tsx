@@ -7,14 +7,19 @@ import {
   SafeAreaView,
   Animated as RNAnimated,
   Image as RNImage,
+  ImageBackground,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  Dimensions,
 } from 'react-native';
+
+import LottieView from 'lottie-react-native';
 
 import colors from '~/util/colors';
 import images from '~/assets/images';
+import animations from '~/assets/animations';
 
 const align = value => {
   return {
@@ -100,9 +105,10 @@ const parseProps = props => {
     opacity: props.opacity || undefined,
     transform: props.transform || undefined,
     pointerEvents: props.pointerEvents || undefined,
+    zIndex: props.z || undefined,
   };
 
-  props.source = props.name ? images[props.name] : undefined;
+  props.source = props.name ? images[props.name] : props.uri ? { uri: props.uri } : undefined;
   props.hitSlop = props.hitSlop
     ? { top: props.hitSlop, bottom: props.hitSlop, left: props.hitSlop, right: props.hitSlop }
     : undefined;
@@ -190,6 +196,8 @@ const parseProps = props => {
   delete props.opacity;
   delete props.transform;
   delete props.name;
+  delete props.uri;
+  delete props.z;
 
   return { style: style, properties: props };
 };
@@ -228,18 +236,23 @@ const Animated = props => {
   return <RNAnimated.View {...properties} style={style} />;
 };
 
-const Image = props => {
+const Background = props => {
   const { style, properties } = parseProps({ ...props });
-  return <RNImage {...properties} style={style} />;
+  return <ImageBackground {...properties} style={style} />;
+};
+
+const Animation = props => {
+  const { style, properties } = parseProps({ ...props });
+  return <LottieView {...properties} style={style} source={animations[props.name]} />;
 };
 
 const Touchable = props => {
   const { style, properties } = parseProps({ ...props });
   switch (props.animation) {
-    case 'opacity':
-      return <TouchableOpacity {...properties} style={style} />;
-    default:
+    case 'none':
       return <TouchableWithoutFeedback {...properties} style={style} />;
+    default:
+      return <TouchableOpacity {...properties} style={style} />;
   }
 };
 
@@ -253,4 +266,67 @@ const KeyboardAvoid = props => {
   );
 };
 
-export default { Column, Row, Center, Absolute, SafeArea, Scroll, Animated, Image, Touchable, KeyboardAvoid };
+const Image = props => {
+  const { style, properties } = parseProps({ ...props });
+
+  const [width, setWidth] = React.useState(0);
+  const [height, setHeight] = React.useState(0);
+
+  const getSizeBySource = source => {
+    return RNImage.resolveAssetSource(source);
+  };
+
+  const getSizeByUri = uri => {
+    return new Promise((resolve, reject) => {
+      RNImage.getSize(
+        uri,
+        (width, height) => resolve({ width, height }),
+        error => reject(error),
+      );
+    });
+  };
+
+  const getSize = async () => {
+    const window = Dimensions.get('window');
+    const percToInt = perc => parseInt(perc.replace('%', ''), 10) / 100;
+    const input_width = typeof style.width === 'string' ? percToInt(style.width) * window.width : style.width;
+    const input_height = typeof style.height === 'string' ? percToInt(style.height) * window.height : style.height;
+
+    const source = props.name ? getSizeBySource(properties.source) : null;
+    const uri = props.uri ? await getSizeByUri(properties.source.uri) : null;
+    const dimensions = source || uri;
+
+    if (!input_width && !input_height) {
+      setWidth(dimensions.width);
+      setHeight(dimensions.height);
+    } else if (input_width && !input_height) {
+      setWidth(input_width);
+      setHeight(dimensions.height * (input_width / dimensions.width));
+    } else if (!input_width && input_height) {
+      setWidth(dimensions.width * (input_height / dimensions.height));
+      setHeight(input_height);
+    } else {
+      setWidth(input_width);
+      setHeight(input_height);
+    }
+  };
+
+  getSize();
+
+  return <RNImage {...properties} style={{ ...style, height, width }} />;
+};
+
+export default {
+  Column,
+  Row,
+  Center,
+  Absolute,
+  SafeArea,
+  Scroll,
+  Animated,
+  Image,
+  Background,
+  Animation,
+  Touchable,
+  KeyboardAvoid,
+};
