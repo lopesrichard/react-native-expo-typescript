@@ -5,7 +5,8 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   SafeAreaView,
-  Animated as Animation,
+  Animated as RNAnimated,
+  Image as RNImage,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
@@ -13,6 +14,7 @@ import {
 } from 'react-native';
 
 import colors from '~/util/colors';
+import images from '~/assets/images';
 
 const align = value => {
   return {
@@ -100,9 +102,20 @@ const parseProps = props => {
     pointerEvents: props.pointerEvents || undefined,
   };
 
+  props.source = props.name ? images[props.name] : undefined;
+  props.hitSlop = props.hitSlop
+    ? { top: props.hitSlop, bottom: props.hitSlop, left: props.hitSlop, right: props.hitSlop }
+    : undefined;
+
   for (var prop in style) {
     if (style[prop] === undefined) {
       delete style[prop];
+    }
+  }
+
+  for (var prop in props) {
+    if (props[prop] === undefined) {
+      delete props[prop];
     }
   }
 
@@ -176,10 +189,7 @@ const parseProps = props => {
   delete props.shadow;
   delete props.opacity;
   delete props.transform;
-
-  props.hitSlop = props.hitSlop
-    ? { top: props.hitSlop, bottom: props.hitSlop, left: props.hitSlop, right: props.hitSlop }
-    : undefined;
+  delete props.name;
 
   return { style: style, properties: props };
 };
@@ -215,7 +225,12 @@ const Scroll = props => {
 
 const Animated = props => {
   const { style, properties } = parseProps({ ...props });
-  return <Animation.View {...properties} style={style} />;
+  return <RNAnimated.View {...properties} style={style} />;
+};
+
+const Image = props => {
+  const { style, properties } = parseProps({ ...props });
+  return <RNImage {...properties} style={style} />;
 };
 
 const Touchable = props => {
@@ -238,4 +253,4 @@ const KeyboardAvoid = props => {
   );
 };
 
-export default { Column, Row, Center, Absolute, SafeArea, Scroll, Animated, Touchable, KeyboardAvoid };
+export default { Column, Row, Center, Absolute, SafeArea, Scroll, Animated, Image, Touchable, KeyboardAvoid };
