@@ -10,7 +10,7 @@ const tron = Reactotron.configure({ host: '192.168.0.20' })
 
 tron.clear();
 
-console.tron = tron;
+console['tron'] = tron;
 console.disableYellowBox = true;
 console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
 
