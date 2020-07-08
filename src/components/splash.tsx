@@ -1,14 +1,14 @@
 import React from 'react';
 
 import LottieView from 'lottie-react-native';
-import View from '~/components/view';
+import * as Grid from '~/components/grid';
 
-import animations from '~/assets/animations';
+import { animations } from '~/assets/animations';
 
-export default () => {
+export const Splash = () => {
   return (
-    <View.Center flex={1} color="primary">
+    <Grid.Center flex={1} color="primary">
       <LottieView source={animations.loading} autoPlay loop />
-    </View.Center>
+    </Grid.Center>
   );
 };

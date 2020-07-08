@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
-import View from '~/components/view';
-import Icon from '~/components/icon';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootNavigatorScreenList } from '~/navigators';
 
-export default ({ navigation, color }) => {
+import * as Grid from '~/components/grid';
+import { Icon } from '~/components/icon';
+
+export type BackButtonProps = {
+  color: string;
+  navigation: StackNavigationProp<RootNavigatorScreenList>;
+};
+
+export const BackButton: FunctionComponent<BackButtonProps> = ({ navigation, color }) => {
   return (
-    <View.Touchable flex={1} animation="opacity" onPress={() => navigation.goBack()} px={25} hitSlop={20}>
+    <Grid.Touchable
+      flex={1}
+      animation="opacity"
+      onPress={() => navigation.goBack()}
+      px={25}
+      hitSlop={{ top: 20, bottom: 20, left: 20, right: 20 }}>
       <Icon name="arrow-left" size={25} color={color} />
-    </View.Touchable>
+    </Grid.Touchable>
   );
 };

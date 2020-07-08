@@ -1,35 +1,25 @@
-import Storage from '~/services/storage';
+import * as Storage from '~/services/storage';
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type Card = {
   number: string;
 };
 
-type ActionPushProps = {
-  payload: Card[];
-};
-
-type ActionAddProps = {
-  payload: Card;
-};
-
-type ActionRemoveProps = {
-  payload: Card;
-};
+const INITIAL_STATE: Card[] = [];
 
 const { actions, reducer } = createSlice({
   name: 'cards',
-  initialState: [],
+  initialState: INITIAL_STATE,
   reducers: {
-    init: (state, action: ActionPushProps) => {
+    init: (state, action: PayloadAction<Card[]>) => {
       state.push(...action.payload);
     },
-    addCard: (state, action: ActionAddProps) => {
+    addCard: (state, action: PayloadAction<Card>) => {
       state.push(action.payload);
       Storage.save('@cards', state);
     },
-    removeCard: (state, action: ActionRemoveProps) => {
+    removeCard: (state, action: PayloadAction<Card>) => {
       const index = state.findIndex(card => card.number === action.payload.number);
       state.splice(index, 1);
       Storage.save('@cards', state);
@@ -39,8 +29,3 @@ const { actions, reducer } = createSlice({
 
 export const { addCard, removeCard } = actions;
 export default reducer;
-
-// (async () => {
-//   const cards = await Storage.load('@cards');
-//   cards && store.dispatch(actions.init(cards));
-// })();

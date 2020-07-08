@@ -1,13 +1,13 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { enableScreens } from 'react-native-screens';
-import Router from '~/navigators';
+import { Router } from '~/navigators';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from '~/slices';
-import Reactotron from './reactotron';
-import Splash from '~/components/splash';
-import Storage from '~/services/storage';
+import { rootReducer } from '~/slices';
+import { Reactotron } from './reactotron';
+import { Splash } from '~/components/splash';
+import * as Storage from '~/services/storage';
 
 enableScreens();
 

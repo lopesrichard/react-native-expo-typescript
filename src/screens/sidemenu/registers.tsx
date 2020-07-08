@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, FunctionComponent } from 'react';
 
-import Page from '~/screens/sidemenu/page';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootNavigatorScreenList } from '~/navigators';
 
-import Text from '~/components/text';
-import Input from '~/components/input';
+import { Page } from '~/screens/sidemenu/page';
 
-export default ({ navigation }) => {
+import * as Text from '~/components/text';
+import * as Input from '~/components/input';
+
+export type RegistersProps = {
+  navigation: DrawerNavigationProp<RootNavigatorScreenList>;
+};
+
+export const Registers: FunctionComponent<RegistersProps> = ({ navigation }) => {
   const [name, setName] = useState('');
   const [document, setDocument] = useState('');
   const [birthDay, setBirthDay] = useState('');
+
   return (
     <Page navigation={navigation}>
       <Text.Bold size={50} color="primary">

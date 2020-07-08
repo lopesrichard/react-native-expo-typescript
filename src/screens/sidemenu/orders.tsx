@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
-import Page from '~/screens/sidemenu/page';
+import { DrawerNavigationProp } from '@react-navigation/drawer';
+import { RootNavigatorScreenList } from '~/navigators';
 
-import Text from '~/components/text';
+import { Page } from '~/screens/sidemenu/page';
 
-export default ({ navigation }) => {
+import * as Text from '~/components/text';
+
+export type OrdersProps = {
+  navigation: DrawerNavigationProp<RootNavigatorScreenList>;
+};
+
+export const Orders: FunctionComponent<OrdersProps> = ({ navigation }) => {
   return (
     <Page navigation={navigation}>
       <Text.Bold size={50} color="primary">

@@ -1,24 +1,18 @@
-import Storage from '~/services/storage';
+import * as Storage from '~/services/storage';
 
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type User = {
   name: string;
 };
 
-type ActionPushProps = {
-  payload: User;
-};
-
-type ActionRemoveProps = {
-  payload: User;
-};
+const INITIAL_STATE: User | null = null;
 
 const { actions, reducer } = createSlice({
   name: 'user',
-  initialState: null,
+  initialState: INITIAL_STATE,
   reducers: {
-    login: (state, action: ActionPushProps) => {
+    login: (state, action: PayloadAction<User>) => {
       Storage.save('@user', action.payload);
       return action.payload;
     },

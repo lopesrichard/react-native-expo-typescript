@@ -1,20 +1,25 @@
 import React from 'react';
 
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { StackHeaderOptions, StackNavigationProp } from '@react-navigation/stack/lib/typescript/src/types';
 
-import Welcome from '~/screens/welcome';
-import Register from '~/screens/register';
-import Login from '~/screens/login';
+import { Welcome } from '~/screens/welcome';
+import { Register } from '~/screens/register';
+import { Login } from '~/screens/login';
 
-import BackButton from '~/components/navigators/stack/back_button';
-import Contants from '~/navigators/contants';
+import { BackButton } from '~/components/navigators/stack/back_button';
+import { Constants } from '~/navigators/contants';
+import { RootNavigatorScreenList } from '.';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootNavigatorScreenList>();
 
-const options = ({ navigation }) => ({
+export type Options = {
+  navigation: StackNavigationProp<RootNavigatorScreenList>;
+};
+
+const options = ({ navigation }: Options): StackHeaderOptions => ({
   headerTitle: () => null,
-  headerStyle: Contants.stack.headerStyle,
+  headerStyle: Constants.stack.headerStyle,
   headerTransparent: true,
   headerLeft: () => <BackButton navigation={navigation} color="primary" />,
 });

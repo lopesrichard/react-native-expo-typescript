@@ -1,31 +1,36 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
+import { NavigationProp } from '@react-navigation/native';
+import { RootNavigatorScreenList } from '~/navigators';
 
-import View from '~/components/view';
-import Text from '~/components/text';
+import { useSelector } from 'react-redux';
 
-const Wallet = ({ navigation, cards }) => {
+import { RootState } from '~/slices';
+
+import * as Grid from '~/components/grid';
+import * as Text from '~/components/text';
+
+export type WalletProps = {
+  navigation: NavigationProp<RootNavigatorScreenList>;
+};
+
+export const Wallet = ({ navigation }: WalletProps) => {
+  const cards = useSelector((state: RootState) => state.cards);
+
   return (
-    <View.Center flex={1} color="white" p={20}>
+    <Grid.Center flex={1} color="white" p={20}>
       <Text.Bold size={50} align="center" color="primary">
         Minha Carteira
       </Text.Bold>
-      <View.Scroll my={50}>
+      <Grid.Scroll my={50}>
         {cards.map(card => (
-          <View.Center color="primary" p={20} br={5} my={5}>
+          <Grid.Center color="primary" p={20} br={5} my={5}>
             <Text.Normal color="white" size={18}>
               {card.number}
             </Text.Normal>
-          </View.Center>
+          </Grid.Center>
         ))}
-      </View.Scroll>
-    </View.Center>
+      </Grid.Scroll>
+    </Grid.Center>
   );
 };
-
-const mapState = state => ({
-  cards: state.cards,
-});
-
-export default connect(mapState)(Wallet);

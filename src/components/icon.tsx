@@ -1,10 +1,15 @@
 import { MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+import { IconProps } from 'react-native-vector-icons/Icon';
 
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 
-import colors from '~/util/colors';
+import { colors } from '~/util/colors';
 
-export default function Icon(props) {
+export type CustomIconProps = {
+  vendor?: string;
+};
+
+export const Icon: FunctionComponent<IconProps & CustomIconProps> = props => {
   const properties = { ...props, color: props.color ? colors.parse(props.color) : undefined };
   const vendor = props.vendor || 'fontawesome';
   switch (vendor.toLowerCase()) {
@@ -13,4 +18,4 @@ export default function Icon(props) {
     case 'fontawesome':
       return <FontAwesome5 {...properties} />;
   }
-}
+};

@@ -1,10 +1,15 @@
 import { MaskService } from 'react-native-masked-text';
 
-export default (type, value) => {
+export enum MaskType {
+  CPF,
+  DATE,
+}
+
+export const mask = (type: MaskType, value: string): string => {
   switch (type) {
-    case 'cpf':
+    case MaskType.CPF:
       return MaskService.toMask('cpf', value);
-    case 'date':
+    case MaskType.DATE:
       return MaskService.toMask('datetime', value, { format: 'MM/DD/YYYY' });
   }
 };

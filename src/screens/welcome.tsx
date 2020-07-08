@@ -1,21 +1,28 @@
 import React from 'react';
 
-import View from '~/components/view';
-import Text from '~/components/text';
-import Button from '~/components/button';
+import { RootNavigatorScreenList } from '~/navigators';
+import { NavigationProp } from '@react-navigation/native';
 
-export default ({ navigation }) => {
+import * as Grid from '~/components/grid';
+import * as Text from '~/components/text';
+import * as Button from '~/components/buttons';
+
+export type WelcomeProps = {
+  navigation: NavigationProp<RootNavigatorScreenList>;
+};
+
+export const Welcome = ({ navigation }: WelcomeProps) => {
   const register = () => navigation.navigate('Register');
   const login = () => navigation.navigate('Login');
   return (
-    <View.Center flex={1} color="white">
+    <Grid.Center flex={1} color="white">
       <Text.Bold size={50} color="primary">
         Bem Vindo
       </Text.Bold>
-      <View.Center mt={50}>
+      <Grid.Center mt={50}>
         <Button.Rounded text="Cadastrar" mt={10} primary onPress={register} />
         <Button.Rounded text="Entrar" mt={10} secondary onPress={login} />
-      </View.Center>
-    </View.Center>
+      </Grid.Center>
+    </Grid.Center>
   );
 };

@@ -1,18 +1,23 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
-
 import { NavigationContainer } from '@react-navigation/native';
 
 import Login from '~/navigators/login';
 import TabMenu from '~/navigators/tabs';
+import { useSelector } from 'react-redux';
+import { RootState } from '~/slices';
 
-const Router = ({ user }) => {
-  return <NavigationContainer>{user ? <TabMenu /> : <Login />}</NavigationContainer>;
+export type RootNavigatorScreenList = {
+  Home: undefined;
+  TabMenu: undefined;
+  Account: undefined;
+  Search: undefined;
+  Welcome: undefined;
+  Register: undefined;
+  Login: undefined;
 };
 
-const mapState = state => ({
-  user: state.user,
-});
-
-export default connect(mapState)(Router);
+export const Router = () => {
+  const user = useSelector((state: RootState) => state.user);
+  return <NavigationContainer>{user ? <TabMenu /> : <Login />}</NavigationContainer>;
+};
