@@ -17,7 +17,7 @@ A template for fast start development of react native apps.
 ## Custom Components
 
 ```jsx
-import View from '~/components/grid';
+import Grid from '~/components/grid';
 import Text from '~/components/text';
 import Button from '~/components/button';
 
